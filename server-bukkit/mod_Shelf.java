@@ -24,11 +24,11 @@ public class mod_Shelf extends NetworkMod implements IGuiHandler {
 
 
    public String getVersion() {
-      return "1.1";
+      return "1.2.5 FML";
    }
 
    public String Version() {
-      return "1.1";
+      return "1.2.5 FML";
    }
 
    public void load() {}

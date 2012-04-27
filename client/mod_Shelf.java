@@ -114,7 +114,7 @@ public class mod_Shelf extends NetworkMod implements IGuiHandler
         return false;
     }
 
-    public void RenderInvBlock(RenderBlocks renderblocks, Block block, int i, int j)
+    public void renderInvBlock(RenderBlocks renderblocks, Block block, int i, int j)
     {
         if (j == shelfModelID)
         {
@@ -122,7 +122,7 @@ public class mod_Shelf extends NetworkMod implements IGuiHandler
         }
     }
 
-    public boolean RenderWorldBlock(RenderBlocks renderblocks, IBlockAccess iblockaccess, int i, int j, int k, Block block, int l)
+    public boolean renderWorldBlock(RenderBlocks renderblocks, IBlockAccess iblockaccess, int i, int j, int k, Block block, int l)
     {
         if (l == shelfModelID)
         {
@@ -136,7 +136,7 @@ public class mod_Shelf extends NetworkMod implements IGuiHandler
 
     public String getVersion()
     {
-        return "1.1";
+        return "1.2.5 FML";
     }
 
     public void load()
