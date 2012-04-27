@@ -171,7 +171,7 @@ public class mod_Shelf extends NetworkMod implements IGuiHandler
    public Object getGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
       TileEntity tileentity = world.getBlockTileEntity(x, y, z);
       if(tileentity != null && (tileentity instanceof TileEntityShelf)) {
-         return new CraftingInventoryShelfCB(player.inventory, ((TileEntityShelf)tileentity));
+         return new GuiShelf(player.inventory, ((TileEntityShelf)tileentity));
       } else {
          return null;
       }     
