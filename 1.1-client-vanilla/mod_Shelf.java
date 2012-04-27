@@ -167,4 +167,22 @@ public class mod_Shelf extends NetworkMod implements IGuiHandler
                     Block.planks, Block.stone, Block.brick, Block.obsidian
                 });
     }
+
+   public Object getGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+      TileEntity tileentity = world.getBlockTileEntity(x, y, z);
+      if(tileentity != null && (tileentity instanceof TileEntityShelf)) {
+         return new CraftingInventoryShelfCB(player.inventory, ((TileEntityShelf)tileentity));
+      } else {
+         return null;
+      }     
+   }       
+
+   public boolean clientSideRequired() 
+   {  
+       return true; 
+   }     
+   public boolean serverSideRequired()
+   {     
+       return false;
+   }
 }

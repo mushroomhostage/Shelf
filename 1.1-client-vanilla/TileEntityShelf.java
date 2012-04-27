@@ -20,6 +20,13 @@ public class TileEntityShelf extends TileEntity
         return items[i];
     }
 
+    /* "When some containers are closed they call this on each slot, then drop whatever it returns as an EntityItem - like when you close a workbench GUI.
+    */
+    public ItemStack getStackInSlotOnClosing(int i)
+    {
+        return null;
+    }
+
     public ItemStack decrStackSize(int i, int j)
     {
         if (items[i] != null)
@@ -87,7 +94,7 @@ public class TileEntityShelf extends TileEntity
                 NBTTagCompound nbttagcompound1 = new NBTTagCompound();
                 nbttagcompound1.setByte("Slot", byte0);
                 items[byte0].writeToNBT(nbttagcompound1);
-                nbttaglist.setTag(nbttagcompound1);
+                nbttaglist.appendTag(nbttagcompound1);
             }
         }
 

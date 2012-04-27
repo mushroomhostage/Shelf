@@ -106,16 +106,10 @@ public class BlockShelf extends BlockContainer
     public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
     {
 	TileEntityShelf tileentityshelf = (TileEntityShelf)world.getBlockTileEntity(i, j, k);
-	if (tileentityshelf != null)
-	{
-	    if(!world.isRemote)
-	    {
-	   	//ModLoader.OpenGUI(entityplayer, new GuiShelf(entityplayer.inventory, tileentityshelf));
-        entityplayer.openGui(mod_Shelf.instance, mod_Shelf.shelfGuiId, world, i, j, k);
-	    } else {
-		mod_Shelf.setCurTileEnt(tileentityshelf);
-	    }
-	}
+	if (tileentityshelf == null || world.isRemote) {
+        return true;
+    }
+    entityplayer.openGui(mod_Shelf.instance, mod_Shelf.shelfGuiId, world, i, j, k);
 	return true;
     }
 
@@ -152,7 +146,7 @@ public class BlockShelf extends BlockContainer
                         entityitem.motionZ = world.rand.nextGaussian() * d;
                         if (itemstack.hasTagCompound())
                         {
-                            entityitem.item.setTagCompound((NBTTagCompound)itemstack.getTagCompound().cloneTag());
+                            entityitem.item.setTagCompound((NBTTagCompound)itemstack.getTagCompound().copy());
                         }
                         world.spawnEntityInWorld(entityitem);
                     }
