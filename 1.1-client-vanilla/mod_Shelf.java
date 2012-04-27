@@ -2,7 +2,7 @@ package net.minecraft.src;
 /*client*/
 import org.lwjgl.opengl.GL11;
 
-public class mod_Shelf extends BaseModMp
+public class mod_Shelf extends NetworkMod
 {
     public static final Block skins[];
     public static Block shelf;
@@ -140,16 +140,16 @@ public class mod_Shelf extends BaseModMp
     {
         shelfModelID = ModLoader.getUniqueBlockModelID(this, true);
         shelf = (new BlockShelf(ShelfID, skins[1])).setBlockName("shelf");
-        ModLoader.RegisterBlock(shelf, net.minecraft.src.ItemShelf.class);
-        ModLoader.RegisterTileEntity(net.minecraft.src.TileEntityShelf.class, "Shelf", new TileEntityShelfRenderer());
-        ModLoader.AddName(shelf, "Shelf");
-        ModLoader.AddName(new ItemStack(shelf, 1, 0), "Wooden Shelf");
-        ModLoader.AddName(new ItemStack(shelf, 1, 4), "Stone Shelf");
-        ModLoader.AddName(new ItemStack(shelf, 1, 8), "Brick Shelf");
-        ModLoader.AddName(new ItemStack(shelf, 1, 12), "Obsidian Shelf");
+        ModLoader.registerBlock(shelf, net.minecraft.src.ItemShelf.class);
+        ModLoader.registerTileEntity(net.minecraft.src.TileEntityShelf.class, "Shelf", new TileEntityShelfRenderer());
+        ModLoader.addName(shelf, "Shelf");
+        ModLoader.addName(new ItemStack(shelf, 1, 0), "Wooden Shelf");
+        ModLoader.addName(new ItemStack(shelf, 1, 4), "Stone Shelf");
+        ModLoader.addName(new ItemStack(shelf, 1, 8), "Brick Shelf");
+        ModLoader.addName(new ItemStack(shelf, 1, 12), "Obsidian Shelf");
         for (int i = 0; i < skins.length; i++)
         {
-            ModLoader.AddRecipe(new ItemStack(shelf, 1, i << 2), new Object[]
+            ModLoader.addRecipe(new ItemStack(shelf, 1, i << 2), new Object[]
                     {
                         "# ", "##", Character.valueOf('#'), skins[i]
                     });
