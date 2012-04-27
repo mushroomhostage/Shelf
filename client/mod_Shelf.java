@@ -12,10 +12,14 @@ public class mod_Shelf extends NetworkMod implements IGuiHandler
     public static int shelfModelID;
     public static final float itemspace = 0.25F;
     public static final float width = 0.3333333F;
+    @MLProp(min=1, max=255)
     public static int ShelfID = 180;
+    @MLProp
     public static boolean Render3DItems = false;
+    @MLProp
     public static boolean RotateItems = false;
 
+    @MLProp(min=1, max=255)
     public static final short shelfGuiId = 47;
 
     public mod_Shelf()

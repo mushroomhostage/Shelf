@@ -38,6 +38,12 @@ public class BlockShelf extends BlockContainer
         return new TileEntityShelf();
     }
 
+    public void onBlockAdded(World world, int i, int j, int k)
+    {
+        super.onBlockAdded(world, i, j, k);
+        world.markBlockNeedsUpdate(i, j, k);
+    }
+
     public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving)
     {
         int l = MathHelper.floor_double((double)((entityliving.rotationYaw * 4F) / 360F) + 0.5D) & 3;

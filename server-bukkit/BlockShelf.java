@@ -47,6 +47,11 @@ public class BlockShelf extends BlockContainer {
       return new TileEntityShelf();
    }
 
+   public void onPlace(World world, int i, int j, int k) {
+      super.onPlace(world, i, j, k);
+      world.a(i, j, k);
+   }
+
    public void postPlace(World world, int i, int j, int k, EntityLiving entityliving) {
       int l = MathHelper.floor((double)(entityliving.yaw * 4.0F / 360.0F) + 0.5D) & 3;
       int i1 = world.getData(i, j, k) & 12;
