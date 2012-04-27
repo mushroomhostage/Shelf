@@ -107,6 +107,7 @@ public class BlockShelf extends BlockContainer {
    public boolean interact(World world, int i, int j, int k, EntityHuman entityhuman) {
       TileEntityShelf tileentityshelf = (TileEntityShelf)world.getTileEntity(i, j, k);
       if(tileentityshelf != null) {
+         // TODO
          ModLoader.OpenGUI(entityhuman, 47, tileentityshelf, new CraftingInventoryShelfCB(entityhuman.inventory, tileentityshelf));
       }
 

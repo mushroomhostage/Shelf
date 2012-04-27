@@ -1,6 +1,5 @@
 package net.minecraft.server;
 
-import net.minecraft.server.BaseModMp;
 import net.minecraft.server.Block;
 import net.minecraft.server.BlockShelf;
 import net.minecraft.server.ItemShelf;
@@ -8,7 +7,9 @@ import net.minecraft.server.ItemStack;
 import net.minecraft.server.ModLoader;
 import net.minecraft.server.TileEntityShelf;
 
-public class mod_Shelf extends BaseModMp {
+import forge.*;
+
+public class mod_Shelf extends NetworkMod {
 
    public static final Block[] skins = new Block[]{Block.WOOD, Block.STONE, Block.BRICK, Block.OBSIDIAN};
    public static Block shelf;
@@ -34,13 +35,21 @@ public class mod_Shelf extends BaseModMp {
    public void ModsLoaded() {
       shelfModelID = ModLoader.getUniqueBlockModelID(this, true);
       shelf = (new BlockShelf(ShelfID, skins[1])).a("shelf");
-      ModLoader.RegisterBlock(shelf, ItemShelf.class);
-      ModLoader.RegisterTileEntity(TileEntityShelf.class, "Shelf");
+      ModLoader.registerBlock(shelf, ItemShelf.class);
+      ModLoader.registerTileEntity(TileEntityShelf.class, "Shelf");
 
       for(int i = 0; i < skins.length; ++i) {
-         ModLoader.AddRecipe(new ItemStack(shelf, 1, i << 2), new Object[]{"# ", "##", Character.valueOf('#'), skins[i]});
+         ModLoader.addRecipe(new ItemStack(shelf, 1, i << 2), new Object[]{"# ", "##", Character.valueOf('#'), skins[i]});
       }
 
    }
 
+   public boolean clientSideRequired()
+   {
+       return true;
+   }
+   public boolean serverSideRequired()
+   {
+       return false;
+   }
 }
