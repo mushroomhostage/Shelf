@@ -51,10 +51,15 @@ public class mod_Shelf extends NetworkMod implements IGuiHandler {
       MinecraftForge.setGuiHandler(this, this);
    }
 
+/*
+* Returns a Container to be displayed to the user.
+* On the client side, this needs to return a instance of GuiScreen
+* On the server side, this needs to return a instance of Container <--
+*/
    public Object getGuiElement(int ID, EntityHuman player, World world, int x, int y, int z) {
       TileEntity tileentity = world.getTileEntity(x, y, z);
       if(tileentity != null && (tileentity instanceof TileEntityShelf)) {
-         return new CraftingInventoryShelfCB(player.inventory, ((TileEntityShelf)tileentity));
+         return new CraftingInventoryShelfCB(player, ((TileEntityShelf)tileentity));
       } else {
          return null;
       }

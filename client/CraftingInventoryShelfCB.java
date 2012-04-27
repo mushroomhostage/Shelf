@@ -3,9 +3,13 @@ package net.minecraft.src;
 public class CraftingInventoryShelfCB extends Container
 {
     private TileEntityShelf entity;
+    public EntityPlayer player;
+    public IInventory iinventory;
 
-    public CraftingInventoryShelfCB(IInventory iinventory, TileEntityShelf tileentityshelf)
+    public CraftingInventoryShelfCB(EntityPlayer player, TileEntityShelf tileentityshelf)
     {
+        this.player = player;
+        this.iinventory = player.inventory;
         entity = tileentityshelf;
         for (int i = 0; i < 3; i++)
         {

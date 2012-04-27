@@ -10,9 +10,11 @@ import net.minecraft.server.TileEntityShelf;
 public class CraftingInventoryShelfCB extends Container {
 
    private TileEntityShelf entity;
+   public EntityHuman player;
 
-
-   public CraftingInventoryShelfCB(IInventory iinventory, TileEntityShelf tileentityshelf) {
+   public CraftingInventoryShelfCB(EntityHuman player, TileEntityShelf tileentityshelf) {
+      this.player = player;
+      IInventory iinventory = player.inventory;
       this.entity = tileentityshelf;
 
       int k;
@@ -41,5 +43,13 @@ public class CraftingInventoryShelfCB extends Container {
 
    public ItemStack a(int i) {
       return null;
+   }
+
+   public EntityHuman getPlayer() {
+      return player;
+   }
+
+   public IInventory getInventory() {
+       return entity;
    }
 }

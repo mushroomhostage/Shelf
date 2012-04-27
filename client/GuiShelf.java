@@ -7,11 +7,13 @@ public class GuiShelf extends GuiContainer
 {
     private IInventory inventory;
     private TileEntityShelf shelf;
+    public EntityPlayer player;
 
-    public GuiShelf(IInventory iinventory, TileEntityShelf tileentityshelf)
+    public GuiShelf(EntityPlayer player, TileEntityShelf tileentityshelf)
     {
-        super(new CraftingInventoryShelfCB(iinventory, tileentityshelf));
-        inventory = iinventory;
+        super(new CraftingInventoryShelfCB(player, tileentityshelf));
+        this.player = player;
+        inventory = player.inventory;
         shelf = tileentityshelf;
         allowUserInput = false;
     }
