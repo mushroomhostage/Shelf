@@ -42,6 +42,16 @@ public class TileEntityShelf extends TileEntity implements IInventory {
       }
    }
 
+   public ItemStack splitWithoutUpdate(int i) {
+      if(this.items[i] != null) {
+         ItemStack itemstack1 = this.items[i];
+         this.items[i] = null;
+         return itemstack1;
+      } else {
+         return null;
+      }
+   }
+
    public void setItem(int i, ItemStack itemstack) {
       this.items[i] = itemstack;
       if(itemstack != null && itemstack.count > this.getMaxStackSize()) {
@@ -78,7 +88,7 @@ public class TileEntityShelf extends TileEntity implements IInventory {
          if(this.items[byte0] != null) {
             NBTTagCompound nbttagcompound1 = new NBTTagCompound();
             nbttagcompound1.setByte("Slot", byte0);
-            this.items[byte0].b(nbttagcompound1);
+            this.items[byte0].save(nbttagcompound1);
             nbttaglist.add(nbttagcompound1);
          }
       }
@@ -89,6 +99,10 @@ public class TileEntityShelf extends TileEntity implements IInventory {
    public int getMaxStackSize() {
       return 64;
    }
+
+   public void setMaxStackSize(int i) {
+   }
+
 
    public boolean a(EntityHuman entityhuman) {
       return this.world.getTileEntity(this.x, this.y, this.z) != this?false:entityhuman.e((double)this.x + 0.5D, (double)this.y + 0.5D, (double)this.z + 0.5D) <= 64.0D;
