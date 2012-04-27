@@ -108,9 +108,10 @@ public class BlockShelf extends BlockContainer
 	TileEntityShelf tileentityshelf = (TileEntityShelf)world.getBlockTileEntity(i, j, k);
 	if (tileentityshelf != null)
 	{
-	    if(!world.multiplayerWorld)
+	    if(!world.isRemote)
 	    {
-	   	ModLoader.OpenGUI(entityplayer, new GuiShelf(entityplayer.inventory, tileentityshelf));
+	   	//ModLoader.OpenGUI(entityplayer, new GuiShelf(entityplayer.inventory, tileentityshelf));
+        entityplayer.openGui(mod_Shelf.instance, mod_Shelf.shelfGuiId, world, i, j, k);
 	    } else {
 		mod_Shelf.setCurTileEnt(tileentityshelf);
 	    }

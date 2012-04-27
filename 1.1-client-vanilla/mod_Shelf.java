@@ -2,8 +2,11 @@ package net.minecraft.src;
 /*client*/
 import org.lwjgl.opengl.GL11;
 
-public class mod_Shelf extends NetworkMod
+import net.minecraft.src.forge.*;
+
+public class mod_Shelf extends NetworkMod implements IGuiHandler
 {
+    public static mod_Shelf instance;
     public static final Block skins[];
     public static Block shelf;
     public static int shelfModelID;
@@ -14,10 +17,10 @@ public class mod_Shelf extends NetworkMod
     public static boolean RotateItems = false;
 
     public static final short shelfGuiId = 47;
-    private static TileEntityShelf hax;
 
     public mod_Shelf()
     {
+        instance = this;
     }
 
     private void RenderShelfInInv(RenderBlocks renderblocks, Block block, int i)
@@ -154,23 +157,9 @@ public class mod_Shelf extends NetworkMod
                         "# ", "##", Character.valueOf('#'), skins[i]
                     });
         }
-	ModLoaderMp.RegisterGUI(this,shelfGuiId);
-    }
-    public GuiScreen HandleGUI(int inventoryType)
-    {
-	if(inventoryType == shelfGuiId)
-        {
-		if(hax == null) System.out.println("This isn't working.");
-		TileEntityShelf temp = hax; hax = null;
-		return new GuiShelf(ModLoader.getMinecraftInstance().thePlayer.inventory, temp);
-	}
-	else return null;
+        MinecraftForge.setGuiHandler(this, this);
     }
 
-    public static void setCurTileEnt(TileEntityShelf e)
-    {
-	hax = e;
-    }
     static
     {
         skins = (new Block[]
