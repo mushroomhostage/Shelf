@@ -140,7 +140,7 @@ public class mod_Shelf extends NetworkMod implements IGuiHandler
 
     public String getVersion()
     {
-        return "1.2.5 FML";
+        return "1.2.5 FML r2";
     }
 
     public void load()

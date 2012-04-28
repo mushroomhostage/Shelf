@@ -111,12 +111,12 @@ public class BlockShelf extends BlockContainer
 
     public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
     {
-	TileEntityShelf tileentityshelf = (TileEntityShelf)world.getBlockTileEntity(i, j, k);
-	if (tileentityshelf == null || world.isRemote) {
+        TileEntityShelf tileentityshelf = (TileEntityShelf)world.getBlockTileEntity(i, j, k);
+        if (tileentityshelf == null || world.isRemote) {
+            return true;
+        }
+        entityplayer.openGui(mod_Shelf.instance, mod_Shelf.shelfGuiId, world, i, j, k);
         return true;
-    }
-    entityplayer.openGui(mod_Shelf.instance, mod_Shelf.shelfGuiId, world, i, j, k);
-	return true;
     }
 
     public int getBlockTextureFromSide(int i)

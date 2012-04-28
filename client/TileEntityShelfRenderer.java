@@ -50,136 +50,138 @@ public class TileEntityShelfRenderer extends TileEntitySpecialRenderer
                 break;
         }
         GL11.glEnable(32826 /*GL_RESCALE_NORMAL_EXT*/);
-    for (int j = 0; j < tileentityshelf.getSizeInventory(); j++)
-    {
-        if (j == 0)
-        {
-            GL11.glTranslatef(-0.3333333F, 0.0F, -0.3333333F);
-        }
-        else if (j % 3 != 0)
-        {
-            GL11.glTranslatef(0.3333333F, 0.0F, 0.0F);
-        }
-        else
-        {
-            GL11.glTranslatef(-0.6666667F, -0.3333333F, 0.3333333F);
-        }
-        ItemStack itemstack = tileentityshelf.getStackInSlot(j);
-        if (itemstack != null && Item.itemsList[itemstack.itemID] != null)
-        {
-            if (itemstack.itemID < 256 && RenderBlocks.renderItemIn3d(Block.blocksList[itemstack.itemID].getRenderType())) // TODO: stop hardcoding 256
-            {
-                Block block = Block.blocksList[itemstack.itemID];
-                if (block instanceof ITextureProvider)
-                {
-                    // Forge infinite sprite sheets
-                    // see http://minecraftforge.net/wiki/How_to_use_infinite_terrain_and_sprite_indexes
-                    bindTextureByName(((ITextureProvider)block).getTextureFile());
-                } 
-                else
-                {
-                    bindTextureByName("/terrain.png");
-                }
 
-                float f2 = 0.25F;
-                int i1 = block.getRenderType();
-                if (i1 == 1 || i1 == 19 || i1 == 12 || i1 == 2)
-                {
-                    f2 = 0.5F;
-                }
-                GL11.glPushMatrix();
-                if (mod_Shelf.RotateItems)
-                {
-                    GL11.glRotatef(f1, 0.0F, 1.0F, 0.0F);
-                }
-                GL11.glScalef(f2, f2, f2);
-                GL11.glTranslatef(0.0F, 0.35F, 0.0F);
-                float f3 = 1.0F;
-                blockrender.renderBlockAsItem(Block.blocksList[itemstack.itemID], itemstack.getItemDamage(), f3);
-                GL11.glPopMatrix();
+        for (int j = 0; j < tileentityshelf.getSizeInventory(); j++)
+        {
+            if (j == 0)
+            {
+                GL11.glTranslatef(-0.3333333F, 0.0F, -0.3333333F);
+            }
+            else if (j % 3 != 0)
+            {
+                GL11.glTranslatef(0.3333333F, 0.0F, 0.0F);
             }
             else
             {
-                GL11.glPushMatrix();
-                try
+                GL11.glTranslatef(-0.6666667F, -0.3333333F, 0.3333333F);
+            }
+            ItemStack itemstack = tileentityshelf.getStackInSlot(j);
+            System.out.println("item "+j+" is "+itemstack);
+            if (itemstack != null && Item.itemsList[itemstack.itemID] != null)
+            {
+                if (itemstack.itemID < 256 && RenderBlocks.renderItemIn3d(Block.blocksList[itemstack.itemID].getRenderType())) // TODO: stop hardcoding 256
                 {
-                    GL11.glScalef(0.3333333F, 0.3333333F, 0.3333333F);
+                    Block block = Block.blocksList[itemstack.itemID];
+                    if (block instanceof ITextureProvider)
+                    {
+                        // Forge infinite sprite sheets
+                        // see http://minecraftforge.net/wiki/How_to_use_infinite_terrain_and_sprite_indexes
+                        bindTextureByName(((ITextureProvider)block).getTextureFile());
+                    } 
+                    else
+                    {
+                        bindTextureByName("/terrain.png");
+                    }
+
+                    float f2 = 0.25F;
+                    int i1 = block.getRenderType();
+                    if (i1 == 1 || i1 == 19 || i1 == 12 || i1 == 2)
+                    {
+                        f2 = 0.5F;
+                    }
+                    GL11.glPushMatrix();
                     if (mod_Shelf.RotateItems)
                     {
                         GL11.glRotatef(f1, 0.0F, 1.0F, 0.0F);
                     }
-                    if (mod_Shelf.Render3DItems)
+                    GL11.glScalef(f2, f2, f2);
+                    GL11.glTranslatef(0.0F, 0.35F, 0.0F);
+                    float f3 = 1.0F;
+                    blockrender.renderBlockAsItem(Block.blocksList[itemstack.itemID], itemstack.getItemDamage(), f3);
+                    GL11.glPopMatrix();
+                }
+                else
+                {
+                    GL11.glPushMatrix();
+                    try
                     {
-                        GL11.glTranslatef(-0.5F, 0.0F, 0.0F);
-                    }
-
-
-                    Item item = Item.itemsList[itemstack.itemID];
-
-                    if (itemstack.getItem().func_46058_c())
-                    {
-                        if (item instanceof ITextureProvider) {
-                            bindTextureByName(((ITextureProvider)item).getTextureFile());
-                        } 
-                        else
+                        GL11.glScalef(0.3333333F, 0.3333333F, 0.3333333F);
+                        if (mod_Shelf.RotateItems)
                         {
-                            bindTextureByName("/gui/items.png");
+                            GL11.glRotatef(f1, 0.0F, 1.0F, 0.0F);
                         }
-                        for (int k = 0; k <= 1; k++)
+                        if (mod_Shelf.Render3DItems)
                         {
-                            int j1 = itemstack.getItem().func_46057_a(itemstack.getItemDamage(), k);
-                            int color = itemstack.getItem().getColorFromDamage(itemstack.getItemDamage(), k);
-                            float red = (float)(color >> 16 & 0xff) / 255F;
-                            float green = (float)(color >> 8 & 0xff) / 255F;
-                            float blue = (float)(color & 0xff) / 255F;
-                            GL11.glColor4f(red, green, blue, 1.0F);
-                            drawItem(j1);
+                            GL11.glTranslatef(-0.5F, 0.0F, 0.0F);
                         }
-                    }
-                    else
-                    {
-                        int l = itemstack.getIconIndex();
-                        if (item instanceof ITextureProvider) 
+
+
+                        Item item = Item.itemsList[itemstack.itemID];
+
+                        if (itemstack.getItem().func_46058_c())
                         {
-                            bindTextureByName(((ITextureProvider)item).getTextureFile());
-                        } 
-                        else 
-                        {
-                            if (itemstack.itemID < 256)     // TODO: stop hardcoding 256
-                            {
-                                bindTextureByName("/terrain.png");
-                            }
+                            if (item instanceof ITextureProvider) {
+                                bindTextureByName(((ITextureProvider)item).getTextureFile());
+                            } 
                             else
                             {
                                 bindTextureByName("/gui/items.png");
                             }
+                            for (int k = 0; k <= 1; k++)
+                            {
+                                int j1 = itemstack.getItem().func_46057_a(itemstack.getItemDamage(), k);
+                                int color = itemstack.getItem().getColorFromDamage(itemstack.getItemDamage(), k);
+                                float red = (float)(color >> 16 & 0xff) / 255F;
+                                float green = (float)(color >> 8 & 0xff) / 255F;
+                                float blue = (float)(color & 0xff) / 255F;
+                                GL11.glColor4f(red, green, blue, 1.0F);
+                                drawItem(j1);
+                            }
                         }
-                        int color = Item.itemsList[itemstack.itemID].getColorFromDamage(itemstack.getItemDamage(), 0);
-                        float red = (float)(color >> 16 & 0xff) / 255F;
-                        float green = (float)(color >> 8 & 0xff) / 255F;
-                        float blue = (float)(color & 0xff) / 255F;
-                        GL11.glColor4f(red, green, blue, 1.0F);
-                        drawItem(l);
+                        else
+                        {
+                            int l = itemstack.getIconIndex();
+                            if (item instanceof ITextureProvider) 
+                            {
+                                bindTextureByName(((ITextureProvider)item).getTextureFile());
+                            } 
+                            else 
+                            {
+                                if (itemstack.itemID < 256)     // TODO: stop hardcoding 256
+                                {
+                                    bindTextureByName("/terrain.png");
+                                }
+                                else
+                                {
+                                    bindTextureByName("/gui/items.png");
+                                }
+                            }
+                            int color = Item.itemsList[itemstack.itemID].getColorFromDamage(itemstack.getItemDamage(), 0);
+                            float red = (float)(color >> 16 & 0xff) / 255F;
+                            float green = (float)(color >> 8 & 0xff) / 255F;
+                            float blue = (float)(color & 0xff) / 255F;
+                            GL11.glColor4f(red, green, blue, 1.0F);
+                            drawItem(l);
+                        }
                     }
+                    catch (Throwable throwable)
+                    {
+                        throw new RuntimeException(throwable);
+                    }
+                    GL11.glPopMatrix();
                 }
-                catch (Throwable throwable)
-                {
-                    throw new RuntimeException(throwable);
-                }
-                GL11.glPopMatrix();
             }
         }
+
+        GL11.glDisable(32826 /*GL_RESCALE_NORMAL_EXT*/);
+        GL11.glPopMatrix();
     }
 
-    GL11.glDisable(32826 /*GL_RESCALE_NORMAL_EXT*/);
-    GL11.glPopMatrix();
-}
-
-private void drawItem(int tileIndex)
-throws IllegalArgumentException, IllegalAccessException, InvocationTargetException
-{
-    Tessellator tessellator = Tessellator.instance;
-    float f = (float)((tileIndex % 16) * 16 + 0) / 256F;
+    private void drawItem(int tileIndex)
+    throws IllegalArgumentException, IllegalAccessException, InvocationTargetException
+    {
+        Tessellator tessellator = Tessellator.instance;
+        float f = (float)((tileIndex % 16) * 16 + 0) / 256F;
         float f1 = (float)((tileIndex % 16) * 16 + 16) / 256F;
         float f2 = (float)((tileIndex / 16) * 16 + 0) / 256F;
         float f3 = (float)((tileIndex / 16) * 16 + 16) / 256F;
