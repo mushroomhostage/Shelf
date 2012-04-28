@@ -4,6 +4,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import org.lwjgl.opengl.GL11;
 
+import net.minecraft.src.forge.*;
+
 public class TileEntityShelfRenderer extends TileEntitySpecialRenderer
 {
     private RenderBlocks blockrender;
@@ -65,11 +67,22 @@ public class TileEntityShelfRenderer extends TileEntitySpecialRenderer
         ItemStack itemstack = tileentityshelf.getStackInSlot(j);
         if (itemstack != null && Item.itemsList[itemstack.itemID] != null)
         {
-            if (itemstack.itemID < 256 && RenderBlocks.renderItemIn3d(Block.blocksList[itemstack.itemID].getRenderType()))
+            if (itemstack.itemID < 256 && RenderBlocks.renderItemIn3d(Block.blocksList[itemstack.itemID].getRenderType())) // TODO: stop hardcoding 256
             {
-                bindTextureByName("/terrain.png");
+                Block block = Block.blocksList[itemstack.itemID];
+                if (block instanceof ITextureProvider)
+                {
+                    // Forge infinite sprite sheets
+                    // see http://minecraftforge.net/wiki/How_to_use_infinite_terrain_and_sprite_indexes
+                    bindTextureByName(((ITextureProvider)block).getTextureFile());
+                } 
+                else
+                {
+                    bindTextureByName("/terrain.png");
+                }
+
                 float f2 = 0.25F;
-                int i1 = Block.blocksList[itemstack.itemID].getRenderType();
+                int i1 = block.getRenderType();
                 if (i1 == 1 || i1 == 19 || i1 == 12 || i1 == 2)
                 {
                     f2 = 0.5F;
@@ -99,9 +112,19 @@ public class TileEntityShelfRenderer extends TileEntitySpecialRenderer
                     {
                         GL11.glTranslatef(-0.5F, 0.0F, 0.0F);
                     }
+
+
+                    Item item = Item.itemsList[itemstack.itemID];
+
                     if (itemstack.getItem().func_46058_c())
                     {
-                        bindTextureByName("/gui/items.png");
+                        if (item instanceof ITextureProvider) {
+                            bindTextureByName(((ITextureProvider)item).getTextureFile());
+                        } 
+                        else
+                        {
+                            bindTextureByName("/gui/items.png");
+                        }
                         for (int k = 0; k <= 1; k++)
                         {
                             int j1 = itemstack.getItem().func_46057_a(itemstack.getItemDamage(), k);
@@ -116,13 +139,20 @@ public class TileEntityShelfRenderer extends TileEntitySpecialRenderer
                     else
                     {
                         int l = itemstack.getIconIndex();
-                        if (itemstack.itemID < 256)
+                        if (item instanceof ITextureProvider) 
                         {
-                            bindTextureByName("/terrain.png");
-                        }
-                        else
+                            bindTextureByName(((ITextureProvider)item).getTextureFile());
+                        } 
+                        else 
                         {
-                            bindTextureByName("/gui/items.png");
+                            if (itemstack.itemID < 256)     // TODO: stop hardcoding 256
+                            {
+                                bindTextureByName("/terrain.png");
+                            }
+                            else
+                            {
+                                bindTextureByName("/gui/items.png");
+                            }
                         }
                         int color = Item.itemsList[itemstack.itemID].getColorFromDamage(itemstack.getItemDamage(), 0);
                         float red = (float)(color >> 16 & 0xff) / 255F;
