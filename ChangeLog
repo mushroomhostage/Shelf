@@ -1,4 +1,4 @@
-X    1.2.5 FML r2
+2012-04-27  1.2.5 FML r2        mushroomhostage
     * Add support for ITextureProvider to fix rendering of Forge items
 
 2012-04-26  1.2.5 FML r1        mushroomhostage
@@ -9,3 +9,6 @@ X    1.2.5 FML r2
 
 2012-01-16  1.1 SMP             Riking
     * Initial SMP port: http://www.minecraftforum.net/topic/946805-11risugamis-shelves-for-multiplayer/
+
+****-**-**  *.* SSP             Risugami
+    * Original version: http://www.minecraftforum.net/topic/75440-v125-risugamis-mods-everything-updated/

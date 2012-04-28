@@ -54,7 +54,7 @@ public class TileEntityShelf extends TileEntity
 
     public void setInventorySlotContents(int i, ItemStack itemstack)
     {
-        System.out.println("setInventorySlotContents " +i+" to "+itemstack);
+        //System.out.println("setInventorySlotContents " +i+" to "+itemstack);
         items[i] = itemstack;
         if (itemstack != null && itemstack.stackSize > getInventoryStackLimit())
         {
