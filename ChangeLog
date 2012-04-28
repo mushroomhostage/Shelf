@@ -1,0 +1,11 @@
+X    1.2.5 FML r2
+    * Add support for ITextureProvider to fix rendering of modded items
+
+2012-04-26  1.2.5 FML r1        mushroomhostage
+    * Port to Forge ModLoader and Bukkit
+
+2012-01-17  1.1-R4 Bukkit       DV8FromTheWorld
+    * Port to CraftBukkit 1.1-R4
+
+2012-01-16  1.1 SMP             Riking
+    * Initial SMP port: http://www.minecraftforum.net/topic/946805-11risugamis-shelves-for-multiplayer/
