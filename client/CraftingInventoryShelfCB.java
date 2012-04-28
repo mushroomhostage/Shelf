@@ -9,15 +9,23 @@ public class CraftingInventoryShelfCB extends Container
     public CraftingInventoryShelfCB(EntityPlayer player, TileEntityShelf tileentityshelf)
     {
         this.player = player;
-        this.iinventory = player.inventory;
         entity = tileentityshelf;
+
         for (int i = 0; i < 3; i++)
         {
             for (int l = 0; l < 3; l++)
             {
                 addSlot(new Slot(tileentityshelf, l + i * 3, 62 + l * 18, 17 + i * 18));
+                //System.out.println("add slot "+(l + i * 3)+", " + (62 + l * 18) + ", " + (17 + i * 18));
             }
         }
+
+        if (player == null)
+        {
+            return;
+        }
+
+        this.iinventory = player.inventory;
 
         for (int j = 0; j < 3; j++)
         {

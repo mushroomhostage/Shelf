@@ -51,6 +51,8 @@ public class TileEntityShelfRenderer extends TileEntitySpecialRenderer
         }
         GL11.glEnable(32826 /*GL_RESCALE_NORMAL_EXT*/);
 
+        // TODO: fix inventory being empty until player opens GUI first time!
+
         for (int j = 0; j < tileentityshelf.getSizeInventory(); j++)
         {
             if (j == 0)
@@ -66,12 +68,16 @@ public class TileEntityShelfRenderer extends TileEntitySpecialRenderer
                 GL11.glTranslatef(-0.6666667F, -0.3333333F, 0.3333333F);
             }
             ItemStack itemstack = tileentityshelf.getStackInSlot(j);
-            System.out.println("item "+j+" is "+itemstack);
+
+            //System.out.println("item "+j+" is "+itemstack);
             if (itemstack != null && Item.itemsList[itemstack.itemID] != null)
             {
-                if (itemstack.itemID < Block.blocksList.length && RenderBlocks.renderItemIn3d(Block.blocksList[itemstack.itemID].getRenderType()))
+                if (itemstack.itemID < mod_Shelf.numBlocks
+                    && Block.blocksList[itemstack.itemID] != null
+                    && RenderBlocks.renderItemIn3d(Block.blocksList[itemstack.itemID].getRenderType()))
                 {
                     Block block = Block.blocksList[itemstack.itemID];
+
                     if (block instanceof ITextureProvider)
                     {
                         // Forge infinite sprite sheets
@@ -102,6 +108,8 @@ public class TileEntityShelfRenderer extends TileEntitySpecialRenderer
                 }
                 else
                 {
+                    // Items
+
                     GL11.glPushMatrix();
                     try
                     {
@@ -147,7 +155,7 @@ public class TileEntityShelfRenderer extends TileEntitySpecialRenderer
                             } 
                             else 
                             {
-                                if (itemstack.itemID < Block.blocksList.length)
+                                if (itemstack.itemID < mod_Shelf.numBlocks)
                                 {
                                     bindTextureByName("/terrain.png");
                                 }

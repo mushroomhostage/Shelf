@@ -22,6 +22,9 @@ public class mod_Shelf extends NetworkMod implements IGuiHandler
     @MLProp(min=1, max=255)
     public static final short shelfGuiId = 47;
 
+    @MLProp
+    public static final int numBlocks = 256;
+
     public mod_Shelf()
     {
         instance = this;
@@ -140,7 +143,7 @@ public class mod_Shelf extends NetworkMod implements IGuiHandler
 
     public String getVersion()
     {
-        return "1.2.5 FML r2";
+        return "1.2.5 FML";
     }
 
     public void load()

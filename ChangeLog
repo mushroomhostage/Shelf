@@ -1,6 +1,5 @@
 X    1.2.5 FML r2
     * Add support for ITextureProvider to fix rendering of Forge items
-    * Fix hardcoded 256 block ID
 
 2012-04-26  1.2.5 FML r1        mushroomhostage
     * Port to Forge ModLoader and Bukkit
