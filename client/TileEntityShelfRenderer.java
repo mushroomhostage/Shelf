@@ -69,7 +69,7 @@ public class TileEntityShelfRenderer extends TileEntitySpecialRenderer
             System.out.println("item "+j+" is "+itemstack);
             if (itemstack != null && Item.itemsList[itemstack.itemID] != null)
             {
-                if (itemstack.itemID < 256 && RenderBlocks.renderItemIn3d(Block.blocksList[itemstack.itemID].getRenderType())) // TODO: stop hardcoding 256
+                if (itemstack.itemID < Block.blocksList.length && RenderBlocks.renderItemIn3d(Block.blocksList[itemstack.itemID].getRenderType()))
                 {
                     Block block = Block.blocksList[itemstack.itemID];
                     if (block instanceof ITextureProvider)
@@ -147,7 +147,7 @@ public class TileEntityShelfRenderer extends TileEntitySpecialRenderer
                             } 
                             else 
                             {
-                                if (itemstack.itemID < 256)     // TODO: stop hardcoding 256
+                                if (itemstack.itemID < Block.blocksList.length)
                                 {
                                     bindTextureByName("/terrain.png");
                                 }
